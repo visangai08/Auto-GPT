@@ -78,28 +78,28 @@ def construct_main_ai_config() -> AIConfig:
     """
     config = AIConfig.load(CFG.ai_settings_file)
     if CFG.skip_reprompt and config.ai_name:
-        logger.typewriter_log("Name :", Fore.GREEN, config.ai_name)
-        logger.typewriter_log("Role :", Fore.GREEN, config.ai_role)
-        logger.typewriter_log("Goals:", Fore.GREEN, f"{config.ai_goals}")
+        logger.typewriter_log("이름 :", Fore.GREEN, config.ai_name)
+        logger.typewriter_log("역할 :", Fore.GREEN, config.ai_role)
+        logger.typewriter_log("목표:", Fore.GREEN, f"{config.ai_goals}")
         logger.typewriter_log(
-            "API Budget:",
+            "API 예산:",
             Fore.GREEN,
             "infinite" if config.api_budget <= 0 else f"${config.api_budget}",
         )
     elif config.ai_name:
         logger.typewriter_log(
-            "Welcome back! ",
+            "돌아온 것을 환영합니다! ",
             Fore.GREEN,
-            f"Would you like me to return to being {config.ai_name}?",
+            f"{config.ai_name}으로 돌아가시겠습니까?",
             speak_text=True,
         )
         should_continue = clean_input(
-            f"""Continue with the last settings?
-Name:  {config.ai_name}
-Role:  {config.ai_role}
-Goals: {config.ai_goals}
-API Budget: {"infinite" if config.api_budget <= 0 else f"${config.api_budget}"}
-Continue ({CFG.authorise_key}/{CFG.exit_key}): """
+            f"""마지막 설정으로 계속 진행하시겠습니까?
+이름:  {config.ai_name}
+역할:  {config.ai_role}
+목표: {config.ai_goals}
+API 예산: {"infinite" if config.api_budget <= 0 else f"${config.api_budget}"}
+계속 ({CFG.authorise_key}/{CFG.exit_key}): """
         )
         if should_continue.lower() == CFG.exit_key:
             config = AIConfig()
@@ -110,7 +110,7 @@ Continue ({CFG.authorise_key}/{CFG.exit_key}): """
 
     if CFG.restrict_to_workspace:
         logger.typewriter_log(
-            "NOTE:All files/directories created by this agent can be found inside its workspace at:",
+            "참고:이 에이전트가 만든 모든 파일/디렉토리는 다음 작업 공간에서 찾을 수 있습니다.:",
             Fore.YELLOW,
             f"{CFG.workspace_path}",
         )
@@ -122,17 +122,17 @@ Continue ({CFG.authorise_key}/{CFG.exit_key}): """
     logger.typewriter_log(
         config.ai_name,
         Fore.LIGHTBLUE_EX,
-        "has been created with the following details:",
+        "은 다음과 같은 세부 정보로 생성되었습니다:",
         speak_text=True,
     )
 
     # Print the ai config details
     # Name
-    logger.typewriter_log("Name:", Fore.GREEN, config.ai_name, speak_text=False)
+    logger.typewriter_log("이름:", Fore.GREEN, config.ai_name, speak_text=False)
     # Role
-    logger.typewriter_log("Role:", Fore.GREEN, config.ai_role, speak_text=False)
+    logger.typewriter_log("역할:", Fore.GREEN, config.ai_role, speak_text=False)
     # Goals
-    logger.typewriter_log("Goals:", Fore.GREEN, "", speak_text=False)
+    logger.typewriter_log("목표:", Fore.GREEN, "", speak_text=False)
     for goal in config.ai_goals:
         logger.typewriter_log("-", Fore.GREEN, goal, speak_text=False)
 

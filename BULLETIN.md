@@ -1,24 +1,24 @@
-# Website and Documentation Site 📰📖
-Check out *https://agpt.co*, the official news & updates site for Auto-GPT!
-The documentation also has a place here, at *https://docs.agpt.co*
+# 웹사이트 및 문서 사이트 📰📖
+Auto-GPT의 공식 뉴스 및 업데이트 사이트인 *https://agpt.co*를 확인하세요!
+문서도 여기 *https://docs.agpt.co*에서 확인할 수 있습니다.
 
-# 🚀 v0.3.0 Release 🚀
-Over a week and 275 pull requests have passed since v0.2.2, and we are happy to announce
-the release of v0.3.0! *From now on, we will be focusing on major improvements* rather
-than bugfixes, as we feel stability has reached a reasonable level. Most remaining
-issues relate to limitations in prompt generation and the memory system, which will be
-the focus of our efforts for the next release.
+# 🚀 v0.3.0 릴리스 🚀
+v0.2.2 이후 일주일이 지나고 275건의 풀 리퀘스트가 접수되었으며, 기쁜 소식을 알려드립니다.
+v0.3.0의 출시를 발표하게 되어 기쁩니다! *이제부터는 버그 수정보다는 주요 개선 사항*에 집중할 예정입니다.
+안정성이 합리적인 수준에 도달했다고 생각하기 때문입니다. 나머지 대부분의
+프롬프트 생성의 한계와 메모리 시스템과 관련된 문제들이 대부분입니다.
+다음 릴리스에서 중점적으로 개선할 예정입니다.
 
-Highlights and notable changes in this release:
+이번 릴리스의 주요 특징 및 주목할 만한 변경 사항:
 
-## Plugin support 🔌
-Auto-GPT now has support for plugins! With plugins, you can extend Auto-GPT's abilities,
-adding support for third-party services and more.
-See https://github.com/Significant-Gravitas/Auto-GPT-Plugins for instructions and available plugins.
+## 플러그인 지원 🔌
+이제 Auto-GPT에 플러그인이 지원됩니다! 플러그인을 사용하면 Auto-GPT의 기능을 확장할 수 있습니다,
+타사 서비스 등에 대한 지원을 추가할 수 있습니다.
+지침 및 사용 가능한 플러그인은 https://github.com/Significant-Gravitas/Auto-GPT-Plugins 을 참조하세요.
 
-## Changes to Docker configuration 🐋
-The workdir has been changed from */home/appuser* to */app*.
-Be sure to update any volume mounts accordingly!
+## Docker 구성 변경 사항 🐋
+작업 디렉터가 */home/appuser*에서 */app*로 변경되었습니다.
+이에 따라 볼륨 마운트를 업데이트하세요!
 
-# ⚠️ Command `send_tweet` is DEPRECATED, and will be removed in v0.4.0 ⚠️
-Twitter functionality (and more) is now covered by plugins, see [Plugin support 🔌]
+# ⚠️ `send_tweet` 명령은 더 이상 사용되지 않으며, v0.4.0에서 삭제될 예정입니다. ⚠️
+이제 트위터 기능(및 기타)은 플러그인으로 지원됩니다. [플러그인 지원 🔌] 참조

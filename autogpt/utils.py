@@ -130,7 +130,7 @@ def get_latest_bulletin() -> tuple[str, bool]:
         open("data/CURRENT_BULLETIN.md", "w", encoding="utf-8").write(new_bulletin)
         current_bulletin = f"{Fore.RED}::NEW BULLETIN::{Fore.RESET}\n\n{new_bulletin}"
 
-    return f"{news_header}\n{current_bulletin}", is_new_news
+    return f" ", is_new_news
 
 
 def markdown_to_ansi_style(markdown: str):
