@@ -87,16 +87,16 @@ def generate_aiconfig_manual() -> AIConfig:
 
     # Manual Setup Intro
     logger.typewriter_log(
-        "Create an AI-Assistant:",
+        "인공지능 어시스턴트를 만듭니다:",
         Fore.GREEN,
-        "Enter the name of your AI and its role below. Entering nothing will load"
+        "아래에 AI의 이름과 역할을 입력하세요. 아무것도 입력하지 않으면 로드됩니다."
         " defaults.",
         speak_text=True,
     )
 
     # Get AI Name from User
     logger.typewriter_log(
-        "Name your AI: ", Fore.GREEN, "For example, 'Entrepreneur-GPT'"
+        "AI 이름 지정: ", Fore.GREEN, "예: 'Entrepreneur-GPT'"
     )
     ai_name = utils.clean_input("AI Name: ")
     if ai_name == "":
@@ -108,22 +108,20 @@ def generate_aiconfig_manual() -> AIConfig:
 
     # Get AI Role from User
     logger.typewriter_log(
-        "Describe your AI's role: ",
+        "AI의 역할을 설명하세요.",
         Fore.GREEN,
-        "For example, 'an AI designed to autonomously develop and run businesses with"
-        " the sole goal of increasing your net worth.'",
+        "예를 들어, '자율적으로 비즈니스를 개발하고 운영하도록 설계된 인공지능은"
+        "순자산을 늘리는 것이 유일한 목표입니다."
     )
     ai_role = utils.clean_input(f"{ai_name} is: ")
     if ai_role == "":
-        ai_role = "an AI designed to autonomously develop and run businesses with the"
-        " sole goal of increasing your net worth."
+        ai_role = "순자산 증대를 유일한 목표로 비즈니스를 자율적으로 개발하고 운영하도록 설계된 AI입니다."
 
     # Enter up to 5 goals for the AI
     logger.typewriter_log(
-        "Enter up to 5 goals for your AI: ",
+        "인공지능에 대해 최대 5개의 목표를 입력하세요: ",
         Fore.GREEN,
-        "For example: \nIncrease net worth, Grow Twitter Account, Develop and manage"
-        " multiple businesses autonomously'",
+        "예를 들어 예: \n순자산 증가, 트위터 계정 성장, 여러 비즈니스를 자율적으로 개발 및 관리",
     )
     logger.info("Enter nothing to load defaults, enter nothing when finished.")
     ai_goals = []
@@ -134,18 +132,18 @@ def generate_aiconfig_manual() -> AIConfig:
         ai_goals.append(ai_goal)
     if not ai_goals:
         ai_goals = [
-            "Increase net worth",
-            "Grow Twitter Account",
-            "Develop and manage multiple businesses autonomously",
+            "순자산 증가",
+            "트위터 계정 키우기",
+            "여러 비즈니스를 자율적으로 개발 및 관리",
         ]
 
     # Get API Budget from User
     logger.typewriter_log(
-        "Enter your budget for API calls: ",
+        "API 호출에 대한 예산을 입력합니다: ",
         Fore.GREEN,
-        "For example: $1.50",
+        "예: $1.50",
     )
-    logger.info("Enter nothing to let the AI run without monetary limit")
+    logger.info("금액 제한 없이 AI가 실행되도록 하려면 아무것도 입력하지 마세요.")
     api_budget_input = utils.clean_input(
         f"{Fore.LIGHTBLUE_EX}Budget{Style.RESET_ALL}: $"
     )
@@ -156,7 +154,7 @@ def generate_aiconfig_manual() -> AIConfig:
             api_budget = float(api_budget_input.replace("$", ""))
         except ValueError:
             logger.typewriter_log(
-                "Invalid budget input. Setting budget to unlimited.", Fore.RED
+                "예산 입력이 잘못되었습니다. 예산을 무제한으로 설정했습니다.", Fore.RED
             )
             api_budget = 0.0
 
