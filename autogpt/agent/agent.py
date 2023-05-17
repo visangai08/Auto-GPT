@@ -68,7 +68,7 @@ class Agent:
         self.ai_name = ai_name
         self.memory = memory
         self.summary_memory = (
-            "I was created."  # Initial memory necessary to avoid hallucination
+            "나는 창조되었습니다."  # Initial memory necessary to avoid hallucination
         )
         self.last_memory_index = 0
         self.full_message_history = full_message_history
@@ -97,7 +97,7 @@ class Agent:
             else:
                 print(
                     Fore.RED
-                    + "Interrupt signal received. Stopping continuous command execution."
+                    + "인터럽트 신호 수신. 연속 명령 실행 중지."
                     + Style.RESET_ALL
                 )
                 self.next_action_count = 0
@@ -121,11 +121,11 @@ class Agent:
                 and self.cycle_count > cfg.continuous_limit
             ):
                 logger.typewriter_log(
-                    "Continuous Limit Reached: ", Fore.YELLOW, f"{cfg.continuous_limit}"
+                    "연속 한도에 도달했습니다: ", Fore.YELLOW, f"{cfg.continuous_limit}"
                 )
                 break
             # Send message to AI, get response
-            with Spinner("Thinking... "):
+            with Spinner("생각... "):
                 assistant_reply = chat_with_ai(
                     self,
                     self.system_prompt,
@@ -151,12 +151,12 @@ class Agent:
                     )
                     command_name, arguments = get_command(assistant_reply_json)
                     if cfg.speak_mode:
-                        say_text(f"I want to execute {command_name}")
+                        say_text(f"{command_name}을 실행하고 싶습니다.")
 
                     arguments = self._resolve_pathlike_command_args(arguments)
 
                 except Exception as e:
-                    logger.error("Error: \n", str(e))
+                    logger.error("오류: \n", str(e))
             self.log_cycle_handler.log_cycle(
                 self.config.ai_name,
                 self.created_at,
@@ -166,10 +166,10 @@ class Agent:
             )
 
             logger.typewriter_log(
-                "NEXT ACTION: ",
+                "다음 작업: ",
                 Fore.CYAN,
-                f"COMMAND = {Fore.CYAN}{command_name}{Style.RESET_ALL}  "
-                f"ARGUMENTS = {Fore.CYAN}{arguments}{Style.RESET_ALL}",
+                f"명령 = {Fore.CYAN}{command_name}{Style.RESET_ALL}  "
+                f"인자 = {Fore.CYAN}{arguments}{Style.RESET_ALL}",
             )
 
             if not cfg.continuous_mode and self.next_action_count == 0:
@@ -178,32 +178,31 @@ class Agent:
                 # to exit
                 self.user_input = ""
                 logger.info(
-                    "Enter 'y' to authorise command, 'y -N' to run N continuous commands, 's' to run self-feedback commands, "
-                    "'n' to exit program, or enter feedback for "
-                    f"{self.ai_name}..."
+                    "명령을 승인하려면 'y', N개의 연속 명령을 실행하려면 'y -N', 자체 피드백 명령을 실행하려면 's', "
+                    f"프로그램을 종료하려면 'n'을 입력하거나 {self.ai_name}...에 대한 피드백을 입력합니다..."
                 )
                 while True:
                     if cfg.chat_messages_enabled:
-                        console_input = clean_input("Waiting for your response...")
+                        console_input = clean_input("응답을 기다리는 중입니다...")
                     else:
                         console_input = clean_input(
-                            Fore.MAGENTA + "Input:" + Style.RESET_ALL
+                            Fore.MAGENTA + "입력:" + Style.RESET_ALL
                         )
                     if console_input.lower().strip() == cfg.authorise_key:
-                        user_input = "GENERATE NEXT COMMAND JSON"
+                        user_input = "다음 명령 json 생성"
                         break
                     elif console_input.lower().strip() == "s":
                         logger.typewriter_log(
-                            "-=-=-=-=-=-=-= THOUGHTS, REASONING, PLAN AND CRITICISM WILL NOW BE VERIFIED BY AGENT -=-=-=-=-=-=-=",
+                            "-=-=-=-=-=-=-= 이제 에이전트가 생각, 추론, 계획 및 비판을 검증합니다. -=-=-=-=-=-=-=",
                             Fore.GREEN,
                             "",
                         )
-                        thoughts = assistant_reply_json.get("thoughts", {})
+                        thoughts = assistant_reply_json.get("생각", {})
                         self_feedback_resp = self.get_self_feedback(
                             thoughts, cfg.fast_llm_model
                         )
                         logger.typewriter_log(
-                            f"SELF FEEDBACK: {self_feedback_resp}",
+                            f"자체 피드백: {self_feedback_resp}",
                             Fore.YELLOW,
                             "",
                         )
@@ -211,18 +210,18 @@ class Agent:
                         command_name = "self_feedback"
                         break
                     elif console_input.lower().strip() == "":
-                        logger.warn("Invalid input format.")
+                        logger.warn("입력 형식이 잘못되었습니다.")
                         continue
                     elif console_input.lower().startswith(f"{cfg.authorise_key} -"):
                         try:
                             self.next_action_count = abs(
                                 int(console_input.split(" ")[1])
                             )
-                            user_input = "GENERATE NEXT COMMAND JSON"
+                            user_input = "다음 명령 json 생성"
                         except ValueError:
                             logger.warn(
-                                "Invalid input format. Please enter 'y -n' where n is"
-                                " the number of continuous tasks."
+                                "입력 형식이 잘못되었습니다. 'y -n'을 입력하세요."
+                                " 여기서 n은 연속 작업의 수입니다."
                             )
                             continue
                         break
@@ -241,30 +240,30 @@ class Agent:
                         )
                         break
 
-                if user_input == "GENERATE NEXT COMMAND JSON":
+                if user_input == "다음 명령 json 생성":
                     logger.typewriter_log(
-                        "-=-=-=-=-=-=-= COMMAND AUTHORISED BY USER -=-=-=-=-=-=-=",
+                        "-=-=-=-=-=-=-= 사용자가 승인한 명령 -=-=-=-=-=-=-=",
                         Fore.MAGENTA,
                         "",
                     )
-                elif user_input == "EXIT":
-                    logger.info("Exiting...")
+                elif user_input == "종료":
+                    logger.info("종료중...")
                     break
             else:
                 # Print authorized commands left value
                 logger.typewriter_log(
-                    f"{Fore.CYAN}AUTHORISED COMMANDS LEFT: {Style.RESET_ALL}{self.next_action_count}"
+                    f"{Fore.CYAN}승인된 명령이 남았습니다: {Style.RESET_ALL}{self.next_action_count}"
                 )
 
             # Execute command
             if command_name is not None and command_name.lower().startswith("error"):
                 result = (
-                    f"Command {command_name} threw the following error: {arguments}"
+                    f"{command_name} 명령에서 다음 오류가 발생했습니다: {arguments}"
                 )
             elif command_name == "human_feedback":
-                result = f"Human feedback: {user_input}"
+                result = f"입력 피드백: {user_input}"
             elif command_name == "self_feedback":
-                result = f"Self feedback: {user_input}"
+                result = f"자체 피드백: {user_input}"
             else:
                 for plugin in cfg.plugins:
                     if not plugin.can_handle_pre_command():
@@ -278,7 +277,7 @@ class Agent:
                     arguments,
                     self.config.prompt_generator,
                 )
-                result = f"Command {command_name} returned: " f"{command_result}"
+                result = f"{command_name} 명령이 반환되었습니다: " f"{command_result}"
 
                 result_tlength = count_string_tokens(
                     str(command_result), cfg.fast_llm_model
@@ -287,8 +286,8 @@ class Agent:
                     str(self.summary_memory), cfg.fast_llm_model
                 )
                 if result_tlength + memory_tlength + 600 > cfg.fast_token_limit:
-                    result = f"Failure: command {command_name} returned too much output. \
-                        Do not execute this command again with the same arguments."
+                    result = f"실패: {command_name} 명령이 너무 많은 출력을 반환했습니다. \
+                        동일한 인수로 이 명령을 다시 실행하지 마십시오."
 
                 for plugin in cfg.plugins:
                     if not plugin.can_handle_post_command():
@@ -301,13 +300,13 @@ class Agent:
             # history
             if result is not None:
                 self.full_message_history.append(create_chat_message("system", result))
-                logger.typewriter_log("SYSTEM: ", Fore.YELLOW, result)
+                logger.typewriter_log("시스템: ", Fore.YELLOW, result)
             else:
                 self.full_message_history.append(
-                    create_chat_message("system", "Unable to execute command")
+                    create_chat_message("시스템", "명령을 실행할 수 없습니다")
                 )
                 logger.typewriter_log(
-                    "SYSTEM: ", Fore.YELLOW, "Unable to execute command"
+                    "시스템: ", Fore.YELLOW, "명령을 실행할 수 없습니다."
                 )
 
     def _resolve_pathlike_command_args(self, command_args):
@@ -335,10 +334,10 @@ class Agent:
         """
         ai_role = self.config.ai_role
 
-        feedback_prompt = f"Below is a message from me, an AI Agent, assuming the role of {ai_role}. whilst keeping knowledge of my slight limitations as an AI Agent Please evaluate my thought process, reasoning, and plan, and provide a concise paragraph outlining potential improvements. Consider adding or removing ideas that do not align with my role and explaining why, prioritizing thoughts based on their significance, or simply refining my overall thought process."
-        reasoning = thoughts.get("reasoning", "")
-        plan = thoughts.get("plan", "")
-        thought = thoughts.get("thoughts", "")
+        feedback_prompt = f"아래는 {ai_role}의 역할을 맡은 인공지능 에이전트인 제가 보낸 메시지입니다. 인공지능 에이전트로서 저의 약간의 한계를 알고 있으면서 저의 사고 과정, 추론, 계획을 평가해 주시고 잠재적인 개선 사항을 간결한 문단으로 정리해 주세요. 제 역할에 맞지 않는 아이디어를 추가 또는 제거하고 그 이유를 설명하거나, 중요도에 따라 생각의 우선순위를 정하거나, 전반적인 사고 과정을 개선하는 것을 고려하세요."
+        reasoning = thoughts.get("추론", "")
+        plan = thoughts.get("계획", "")
+        thought = thoughts.get("생각", "")
         feedback_thoughts = thought + reasoning + plan
         return create_chat_completion(
             [{"role": "user", "content": feedback_prompt + feedback_thoughts}],

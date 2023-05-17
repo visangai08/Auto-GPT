@@ -63,38 +63,38 @@ def run_auto_gpt(
 
     if cfg.continuous_mode:
         for line in get_legal_warning().split("\n"):
-            logger.warn(markdown_to_ansi_style(line), "LEGAL:", Fore.RED)
+            logger.warn(markdown_to_ansi_style(line), "법률:", Fore.RED)
 
     if not cfg.skip_news:
         motd, is_new_motd = get_latest_bulletin()
         if motd:
             motd = markdown_to_ansi_style(motd)
             for motd_line in motd.split("\n"):
-                logger.info(motd_line, "NEWS:", Fore.GREEN)
+                logger.info(motd_line, "뉴스:", Fore.GREEN)
             if is_new_motd and not cfg.chat_messages_enabled:
                 input(
                     Fore.MAGENTA
                     + Style.BRIGHT
-                    + "NEWS: Bulletin was updated! Press Enter to continue..."
+                    + "뉴스: 게시판이 업데이트되었습니다! 계속하려면 Enter 키를 누르세요..."
                     + Style.RESET_ALL
                 )
 
         git_branch = get_current_git_branch()
         if git_branch and git_branch != "stable":
             logger.typewriter_log(
-                "WARNING: ",
+                "경고: ",
                 Fore.RED,
-                f"You are running on `{git_branch}` branch "
-                "- this is not a supported branch.",
+                f"현재 `{git_branch}` 브랜치에서 실행 중입니다. "
+                "- 지원되지 않는 브랜치입니다.",
             )
         if sys.version_info < (3, 10):
             logger.typewriter_log(
-                "WARNING: ",
+                "경고: ",
                 Fore.RED,
-                "You are running on an older version of Python. "
-                "Some people have observed problems with certain "
-                "parts of Auto-GPT with this version. "
-                "Please consider upgrading to Python 3.10 or higher.",
+                "이전 버전의 Python에서 실행 중입니다. "
+                "일부 사용자는 이 버전에서 Auto-GPT의 "
+                "특정 부분에서 문제를 발견했습니다. "
+                "Python 3.10 이상으로 업그레이드하는 것이 좋습니다.",
             )
 
     if install_plugin_deps:
@@ -116,7 +116,7 @@ def run_auto_gpt(
     file_logger_path = workspace_directory / "file_logger.txt"
     if not file_logger_path.exists():
         with file_logger_path.open(mode="w", encoding="utf-8") as f:
-            f.write("File Operation Logger ")
+            f.write("파일 작업 로거 ")
 
     cfg.file_logger_path = str(file_logger_path)
 
@@ -140,13 +140,13 @@ def run_auto_gpt(
         "autogpt.commands.task_statuses",
     ]
     logger.debug(
-        f"The following command categories are disabled: {cfg.disabled_command_categories}"
+        f"다음 명령 카테고리는 비활성화됩니다: {cfg.disabled_command_categories}"
     )
     command_categories = [
         x for x in command_categories if x not in cfg.disabled_command_categories
     ]
 
-    logger.debug(f"The following command categories are enabled: {command_categories}")
+    logger.debug(f"다음 명령 카테고리가 활성화됩니다: {command_categories}")
 
     for command_category in command_categories:
         command_registry.import_commands(command_category)
@@ -165,19 +165,19 @@ def run_auto_gpt(
     if cfg.chat_messages_enabled:
         for plugin in cfg.plugins:
             if hasattr(plugin, "can_handle_report") and plugin.can_handle_report():
-                logger.info(f"Loaded plugin into logger: {plugin.__class__.__name__}")
+                logger.info(f"로거에 플러그인 로드: {plugin.__class__.__name__}")
                 logger.chat_plugins.append(plugin)
 
     # Initialize memory and make sure it is empty.
     # this is particularly important for indexing and referencing pinecone memory
     memory = get_memory(cfg, init=True)
     logger.typewriter_log(
-        "Using memory of type:", Fore.GREEN, f"{memory.__class__.__name__}"
+        "사용 메모리 유형:", Fore.GREEN, f"{memory.__class__.__name__}"
     )
-    logger.typewriter_log("Using Browser:", Fore.GREEN, cfg.selenium_web_browser)
+    logger.typewriter_log("사용 브라우저:", Fore.GREEN, cfg.selenium_web_browser)
     system_prompt = ai_config.construct_full_prompt()
     if cfg.debug_mode:
-        logger.typewriter_log("Prompt:", Fore.GREEN, system_prompt)
+        logger.typewriter_log("프롬프트:", Fore.GREEN, system_prompt)
 
     agent = Agent(
         ai_name=ai_name,
