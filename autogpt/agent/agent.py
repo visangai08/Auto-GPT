@@ -226,7 +226,7 @@ class Agent:
                             continue
                         break
                     elif console_input.lower() == cfg.exit_key:
-                        user_input = "EXIT"
+                        user_input = "종료"
                         break
                     else:
                         user_input = console_input
