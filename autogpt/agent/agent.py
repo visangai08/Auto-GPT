@@ -166,7 +166,7 @@ class Agent:
             )
 
             logger.typewriter_log(
-                "다음 작업: ",
+                "\n다음 작업: ",
                 Fore.CYAN,
                 f"명령 = {Fore.CYAN}{command_name}{Style.RESET_ALL}  "
                 f"인자 = {Fore.CYAN}{arguments}{Style.RESET_ALL}",

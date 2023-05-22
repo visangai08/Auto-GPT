@@ -69,8 +69,8 @@ def run_auto_gpt(
         motd, is_new_motd = get_latest_bulletin()
         if motd:
             motd = markdown_to_ansi_style(motd)
-            for motd_line in motd.split("\n"):
-                logger.info(motd_line, "뉴스:", Fore.GREEN)
+            # for motd_line in motd.split("\n"):
+            #     logger.info(motd_line, "뉴스:", Fore.GREEN)
             if is_new_motd and not cfg.chat_messages_enabled:
                 input(
                     Fore.MAGENTA
@@ -80,13 +80,13 @@ def run_auto_gpt(
                 )
 
         git_branch = get_current_git_branch()
-        if git_branch and git_branch != "stable":
-            logger.typewriter_log(
-                "경고: ",
-                Fore.RED,
-                f"현재 `{git_branch}` 브랜치에서 실행 중입니다. "
-                "- 지원되지 않는 브랜치입니다.",
-            )
+        # if git_branch and git_branch != "stable":
+        #     logger.typewriter_log(
+        #         "경고: ",
+        #         Fore.RED,
+        #         f"현재 `{git_branch}` 브랜치에서 실행 중입니다. "
+        #         "- 지원되지 않는 브랜치입니다.",
+        #     )
         if sys.version_info < (3, 10):
             logger.typewriter_log(
                 "경고: ",
@@ -171,10 +171,10 @@ def run_auto_gpt(
     # Initialize memory and make sure it is empty.
     # this is particularly important for indexing and referencing pinecone memory
     memory = get_memory(cfg, init=True)
-    logger.typewriter_log(
-        "사용 메모리 유형:", Fore.GREEN, f"{memory.__class__.__name__}"
-    )
-    logger.typewriter_log("사용 브라우저:", Fore.GREEN, cfg.selenium_web_browser)
+    # logger.typewriter_log(
+    #     "사용 메모리 유형:", Fore.GREEN, f"{memory.__class__.__name__}"
+    # )
+    # logger.typewriter_log("사용 브라우저:", Fore.GREEN, cfg.selenium_web_browser)
     system_prompt = ai_config.construct_full_prompt()
     if cfg.debug_mode:
         logger.typewriter_log("프롬프트:", Fore.GREEN, system_prompt)

@@ -1,39 +1,39 @@
-# Code of Conduct for Auto-GPT
+# Auto-GPT 행동 강령
 
-## 1. Purpose
+## 1. 목적
 
-The purpose of this Code of Conduct is to provide guidelines for contributors to the auto-gpt project on GitHub. We aim to create a positive and inclusive environment where all participants can contribute and collaborate effectively. By participating in this project, you agree to abide by this Code of Conduct.
+이 행동 강령의 목적은 GitHub의 자동-gpt 프로젝트 기여자를 위한 가이드라인을 제공하는 것입니다. 우리는 모든 참여자가 효과적으로 기여하고 협업할 수 있는 긍정적이고 포용적인 환경을 조성하는 것을 목표로 합니다. 이 프로젝트에 참여함으로써 귀하는 이 행동 강령을 준수하는 데 동의하게 됩니다.
 
-## 2. Scope
+## 2. 범위
 
-This Code of Conduct applies to all contributors, maintainers, and users of the auto-gpt project. It extends to all project spaces, including but not limited to issues, pull requests, code reviews, comments, and other forms of communication within the project.
+이 행동 강령은 Auto-gpt 프로젝트의 모든 기여자, 관리자 및 사용자에게 적용됩니다. 이슈, 풀 리퀘스트, 코드 리뷰, 댓글 및 프로젝트 내 다른 형태의 커뮤니케이션을 포함하되 이에 국한되지 않는 모든 프로젝트 공간으로 확장됩니다.
 
-## 3. Our Standards
+## 3. 우리의 기준
 
-We encourage the following behavior:
+우리는 다음과 같은 행동을 권장합니다:
 
-* Being respectful and considerate to others
-* Actively seeking diverse perspectives
-* Providing constructive feedback and assistance
-* Demonstrating empathy and understanding
+* 타인을 존중하고 배려하는 태도
+* 다양한 관점을 적극적으로 추구하기
+* 건설적인 피드백 및 지원 제공
+* 공감과 이해의 표현
 
-We discourage the following behavior:
+우리는 다음과 같은 행동을 권장하지 않습니다:
 
-* Harassment or discrimination of any kind
-* Disrespectful, offensive, or inappropriate language or content
-* Personal attacks or insults
-* Unwarranted criticism or negativity
+* 모든 종류의 괴롭힘 또는 차별 행위
+* 무례하거나 모욕적이거나 부적절한 언어 또는 내용
+* 인신 공격 또는 모욕
+* 부당한 비판 또는 부정적 내용
 
-## 4. Reporting and Enforcement
+## 4. 신고 및 집행
 
-If you witness or experience any violations of this Code of Conduct, please report them to the project maintainers by email or other appropriate means. The maintainers will investigate and take appropriate action, which may include warnings, temporary or permanent bans, or other measures as necessary.
+본 행동 강령의 위반을 목격하거나 경험한 경우, 이메일이나 기타 적절한 수단을 통해 프로젝트 관리자에게 신고해 주세요. 관리자는 이를 조사하여 경고, 일시적 또는 영구적 금지 또는 필요에 따라 기타 조치를 포함한 적절한 조치를 취할 것입니다.
 
-Maintainers are responsible for ensuring compliance with this Code of Conduct and may take action to address any violations.
+관리자는 본 행동 강령을 준수할 책임이 있으며 위반 사항을 해결하기 위한 조치를 취할 수 있습니다.
 
-## 5. Acknowledgements
+## 5. 감사의 말
 
-This Code of Conduct is adapted from the [Contributor Covenant](https://www.contributor-covenant.org/version/2/0/code_of_conduct.html).
+본 행동 강령은 [기여자 규약](https://www.contributor-covenant.org/version/2/0/code_of_conduct.html)을 각색한 것입니다.
 
-## 6. Contact
+## 6. 연락처
 
-If you have any questions or concerns, please contact the project maintainers.
+질문이나 우려 사항이 있으면 프로젝트 관리자에게 문의하세요.
