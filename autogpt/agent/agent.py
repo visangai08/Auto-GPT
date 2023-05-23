@@ -201,11 +201,11 @@ class Agent:
                         self_feedback_resp = self.get_self_feedback(
                             thoughts, cfg.fast_llm_model
                         )
-                        logger.typewriter_log(
-                            f"자체 피드백: {self_feedback_resp}",
-                            Fore.YELLOW,
-                            "",
-                        )
+                        # logger.typewriter_log(
+                        #     f"자체 피드백: {self_feedback_resp}",
+                        #     Fore.YELLOW,
+                        #     "",
+                        # )
                         user_input = self_feedback_resp
                         command_name = "self_feedback"
                         break
