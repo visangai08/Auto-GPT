@@ -177,10 +177,10 @@ class Agent:
                 # Get key press: Prompt the user to press enter to continue or escape
                 # to exit
                 self.user_input = ""
-                logger.info(
-                    "명령을 승인하려면 'y', N개의 연속 명령을 실행하려면 'y -N', 자체 피드백 명령을 실행하려면 's', "
-                    f"프로그램을 종료하려면 'n'을 입력하거나 {self.ai_name}...에 대한 피드백을 입력합니다..."
-                )
+                # logger.info(
+                #     "명령을 승인하려면 'y', N개의 연속 명령을 실행하려면 'y -N', 자체 피드백 명령을 실행하려면 's', "
+                #     f"프로그램을 종료하려면 'n'을 입력하거나 {self.ai_name}...에 대한 피드백을 입력합니다..."
+                # )
                 while True:
                     if cfg.chat_messages_enabled:
                         console_input = clean_input("응답을 기다리는 중입니다...")
